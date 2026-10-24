@@ -25,10 +25,6 @@
 
 插件沿用 `zoteroshortdoi@wiernik.org` ID，会替换已安装的同 ID 旧版。偏好设置中的 DOI Manager 页面可配置自动处理和提示标签；工具菜单也提供自动处理选项。本兼容版使用本仓库的 `updates.json` 作为更新地址，避免被原项目的旧版本覆盖。
 
-## 安装失败修复（1.5.0.11）
-
-1.5.0.10 是无法安装的旧包：错误地删除了 Zotero 必需的 `applications.zotero.update_url`。真实安装器返回 `ERROR_CORRUPT_FILE`（-3），详细错误为 `applications.zotero.update_url not provided`。1.5.0.11 恢复该字段，并将更新地址设为本仓库。请使用上面的新版下载链接。
-
 ## 本次适配内容
 
 | 修改 | 目的 |
