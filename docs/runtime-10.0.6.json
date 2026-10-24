@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-24",
+  "environment": "Actual Zotero installation, isolated profile and synthetic test library, headless runtime",
+  "host": {
+    "version": "10.0.6",
+    "id": "zotero@zotero.org"
+  },
+  "oldPackage": {
+    "state": 4,
+    "error": -3
+  },
+  "oldPackageErrorDetail": "applications.zotero.update_url not provided",
+  "newPackage": {
+    "state": 3,
+    "error": 0,
+    "addon": {
+      "id": "zoteroshortdoi@wiernik.org",
+      "version": "1.5.0.11",
+      "isCompatible": true,
+      "appDisabled": false
+    }
+  },
+  "checks": [
+    {
+      "name": "installed-active",
+      "pass": true,
+      "version": "1.5.0.11"
+    },
+    {
+      "name": "item-menu-loaded",
+      "pass": true
+    },
+    {
+      "name": "tools-menu-loaded",
+      "pass": true
+    },
+    {
+      "name": "preference-pane-registered",
+      "pass": true
+    },
+    {
+      "name": "online-doi-clean",
+      "pass": true,
+      "doi": "10.1038/nphys1170"
+    },
+    {
+      "name": "disable-removes-menu",
+      "pass": true
+    },
+    {
+      "name": "enable-restores-menu",
+      "pass": true
+    }
+  ],
+  "error": null,
+  "limitations": [
+    "No visual QA of preferences",
+    "Crossref lookup for missing DOI not tested",
+    "shortDOI conversion not tested",
+    "Large-library operation not tested"
+  ]
+}

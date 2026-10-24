@@ -1,18 +1,46 @@
-# Validation: 1.5.0.10
+# Validation: 1.5.0.11
 
-Date: 2026-10-24. Target: Zotero 10.0.x; inspected local installation: 10.0.6 / Firefox ESR 140.
+Date: 2026-10-24. Host: actual Zotero 10.0.6 / Firefox ESR 140.
 
-## Passed
-- Six Node.js regression tests in a simulated Zotero environment: version bounds and update URL; startup/menu insertion and preference resource; window close/shutdown/restart; DOI cleanup and request routing; mocked successful validation and persistence; automatic verification setting.
-- Syntax checks for bootstrap.js and zoteroshortdoi.js.
-- XPI root manifest and required resources; all 20 archive entries match source bytes.
-- Source inspection of Zotero 10.0.6 plugin sandbox and PreferencePanes interfaces.
+## Installation failure reproduced and fixed
 
-## Not verified
-- Real UI installation, settings rendering, and interaction.
-- End-to-end online DOI/Crossref/shortDOI requests in Zotero.
-- Multiple windows, large libraries, and service/network errors in an actual session.
+The actual AddonManager rejected 1.5.0.10 with install state 4 and error -3 (`ERROR_CORRUPT_FILE`). Zotero's error console reported:
 
-An isolated headless launch attempt did not produce a runtime report. It provides no positive runtime evidence. This repository excludes that test profile, temporary library, runtime logs, and local installation source extracts.
+```text
+Reading manifest: applications.zotero.update_url not provided
+```
 
-The test suite simulates host APIs and an HTTP response. Passing it does not prove runtime or network compatibility. The declared compatibility range is the build's target, not a certification.
+The previous adaptation incorrectly removed a field required by Zotero, despite being optional in the generic Firefox manifest schema. Version 1.5.0.11 restores `applications.zotero.update_url`, pointing at this repository's `updates.json` instead of the original project's update feed.
+
+## Actual runtime checks: 7 passed
+
+An actual Zotero 10.0.6 process used a separate profile and separate synthetic test library. A local diagnostic plugin invoked AddonManager.getInstallForFile(), installed the distributed XPI, then checked:
+
+1. Installed and active, version 1.5.0.11; compatible=true, appDisabled=false.
+2. Item context menu loaded.
+3. Tools menu loaded.
+4. Preference pane registered with the correct resource.
+5. Selected a synthetic article, invoked the plugin's actual menu command, made a live DOI request, and verified `https://doi.org/10.1038/nphys1170` became `10.1038/nphys1170`.
+6. Disabled the plugin and verified its menu disappeared.
+7. Re-enabled it, waited for asynchronous startup, and verified the menu returned.
+
+See the sanitized machine-readable report: [runtime-10.0.6.json](runtime-10.0.6.json).
+
+This was a real headless application runtime test, not visual QA of the user's interactive profile. No user library was used for the test.
+
+## Additional checks
+
+- Six Node.js regression tests pass; the manifest test now requires the fork's update URL. It failed before restoring that field.
+- JavaScript syntax checks pass.
+- XPI root resources and complete source-byte correspondence checked.
+- Update manifest SHA-256 checked against the distributed XPI.
+
+## Not yet verified
+
+- Visual rendering of the settings page.
+- Crossref lookup for articles without a DOI.
+- Long/short DOI conversion end to end.
+- Multiple windows, large libraries and network/service errors.
+- Automatic update delivery; the feed is provided but a future-version update has not been tested.
+
+Raw process logs, profiles, test databases, and local installation source extracts are excluded from the repository. The broken 1.5.0.10 build has been removed from the current dist directory; its earlier Git history remains available.

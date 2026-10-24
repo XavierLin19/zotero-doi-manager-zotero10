@@ -1,10 +1,10 @@
 DOI Manager — unofficial Zotero 10 compatibility build
 Based on bwiernik/zotero-shortdoi v1.5.0, published 2024-08-09.
 Original author: Brenton M. Wiernik. License: MPL-2.0 (see LICENSE).
-Modified: 2026-10-24. Version: 1.5.0.10. Target: Zotero 10.0.x.
+Modified: 2026-10-24. Version: 1.5.0.11. Target: Zotero 10.0.x.
 
 Changes:
-- Declare Zotero 10.0.x compatibility; remove upstream update URL for this local fork.
+- Declare Zotero 10.0.x compatibility; use this fork's required update URL.
 - Use Services provided by Zotero 10's bootstrap sandbox instead of importing Services.jsm.
 - Resolve preferences to content/options.xhtml and await registration.
 - Track/unregister item observer on plugin shutdown; preserve it on window close.
@@ -13,3 +13,5 @@ Changes:
 - Correct multiple-DOI progress-window error target.
 
 Source: https://github.com/bwiernik/zotero-shortdoi/releases/tag/v1.5.0
+
+Installation fix: Zotero requires applications.zotero.update_url; removing it in 1.5.0.10 caused ERROR_CORRUPT_FILE. Restored using this repository''s updates.json.

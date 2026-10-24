@@ -1,4 +1,4 @@
-param([string]$OutputPath = (Join-Path $PSScriptRoot 'dist/zotero-doi-manager-1.5.0.10-zotero10-rebuilt.xpi'))
+param([string]$OutputPath = (Join-Path $PSScriptRoot 'dist/zotero-doi-manager-1.5.0.11-zotero10-rebuilt.xpi'))
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $target = [IO.Path]::GetFullPath($OutputPath)

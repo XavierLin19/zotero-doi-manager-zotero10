@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "DOI Manager",
-  "version": "1.5.0.10",
+  "version": "1.5.0.11",
   "description": "DOI Manager 1.5.0 - unofficial Zotero 10 compatibility build",
   "author": "Brenton M. Wiernik",
   "icons": {
@@ -12,7 +12,8 @@
     "zotero": {
       "id": "zoteroshortdoi@wiernik.org",
       "strict_min_version": "10.0",
-      "strict_max_version": "10.0.*"
+      "strict_max_version": "10.0.*",
+      "update_url": "https://raw.githubusercontent.com/XavierLin19/zotero-doi-manager-zotero10/main/updates.json"
     }
   }
 }

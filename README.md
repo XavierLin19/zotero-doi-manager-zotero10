@@ -4,7 +4,7 @@
 
 > 本项目基于 [Brenton M. Wiernik 的 Zotero DOI Manager（bwiernik/zotero-shortdoi）](https://github.com/bwiernik/zotero-shortdoi)，以其 [v1.5.0 发布包](https://github.com/bwiernik/zotero-shortdoi/releases/tag/v1.5.0) 为修改基础。这是非官方兼容修改版，与原作者及 Zotero 官方无隶属关系。
 >
-> **验证状态**：6 项 Node.js 模拟环境测试及 XPI 结构与内容检查通过。尚未完成 Zotero 10.0.6 真实界面的安装与联网端到端验证；当前版本供安装测试，不能将兼容范围声明视为所有功能均已实测。
+> **验证状态**：已在本机 Zotero 10.0.6 独立配置与独立测试文献库中，通过真实安装器完成安装、启用、菜单与设置页注册、在线 DOI 清理以及停用再启用检查。6 项 Node.js 回归测试也通过。设置页视觉呈现、缺失 DOI 的 Crossref 查询、短 DOI 转换及大型文献库仍需进一步验证。
 
 ## 主要功能
 
@@ -17,19 +17,24 @@
 
 ## 下载与安装
 
-1. 下载仓库内的 [zotero-doi-manager-1.5.0.10-zotero10.xpi](dist/zotero-doi-manager-1.5.0.10-zotero10.xpi?raw=true)。请下载文件本身。
+1. 下载仓库内的 [zotero-doi-manager-1.5.0.11-zotero10.xpi](dist/zotero-doi-manager-1.5.0.11-zotero10.xpi?raw=true)。请下载文件本身。
 2. 在 Zotero 中打开 **工具 → 插件（Add-ons）**。
 3. 点击齿轮，选择 **从文件安装插件**，选中下载的 `.xpi`。
 4. 如提示重启，重启 Zotero。
 5. 先选一篇测试文献，右键打开 **DOI Manager**，测试 **Verify and clean DOIs**。
 
-插件沿用 `zoteroshortdoi@wiernik.org` ID，会替换已安装的同 ID 旧版。偏好设置中的 DOI Manager 页面可配置自动处理和提示标签；工具菜单也提供自动处理选项。本兼容版移除了上游更新 URL，后续版本需要手动安装。
+插件沿用 `zoteroshortdoi@wiernik.org` ID，会替换已安装的同 ID 旧版。偏好设置中的 DOI Manager 页面可配置自动处理和提示标签；工具菜单也提供自动处理选项。本兼容版使用本仓库的 `updates.json` 作为更新地址，避免被原项目的旧版本覆盖。
+
+## 安装失败修复（1.5.0.11）
+
+1.5.0.10 是无法安装的旧包：错误地删除了 Zotero 必需的 `applications.zotero.update_url`。真实安装器返回 `ERROR_CORRUPT_FILE`（-3），详细错误为 `applications.zotero.update_url not provided`。1.5.0.11 恢复该字段，并将更新地址设为本仓库。请使用上面的新版下载链接。
 
 ## 本次适配内容
 
 | 修改 | 目的 |
 | --- | --- |
 | `strict_min_version: 10.0`、`strict_max_version: 10.0.*` | 允许 Zotero 10.0.x 安装 |
+| 保留必需的 `update_url` 并指向本仓库 | 修复 1.5.0.10 因缺失该字段而无法安装的问题 |
 | 使用引导沙箱提供的 `Services` | 移除旧 `Services.jsm` 导入路径 |
 | 设置页定位到 `content/options.xhtml`，等待异步注册 | 修正设置页资源路径和注册流程 |
 | 记录通知观察者，在停用插件时注销 | 修复观察者生命周期 |
@@ -53,7 +58,7 @@ Windows PowerShell 打包：
 .\build.ps1
 ```
 
-默认生成 `dist/zotero-doi-manager-1.5.0.10-zotero10-rebuilt.xpi`；如果目标文件已存在，脚本会拒绝覆盖。可通过 `-OutputPath` 指定其他文件路径。
+默认生成 `dist/zotero-doi-manager-1.5.0.11-zotero10-rebuilt.xpi`；如果目标文件已存在，脚本会拒绝覆盖。可通过 `-OutputPath` 指定其他文件路径。
 
 ```text
 source/              插件源码、图标、语言资源及许可证
@@ -70,7 +75,7 @@ LICENSE              MPL-2.0 原始许可证
 
 An unofficial compatibility adaptation of Zotero DOI Manager 1.5.0 targeting Zotero 10.0.x, especially 10.0.6. It retains the upstream DOI retrieval, shortDOI conversion, validation, and cleanup features while updating bootstrap loading, preference resource resolution, observer and menu cleanup, and automatic verification settings.
 
-Six Node.js tests with a simulated Zotero environment pass. JavaScript syntax and XPI contents have been checked. Installation and online end-to-end behavior in the actual Zotero 10.0.6 UI remain unverified. Download the XPI from `dist/`, then install it using Zotero's “Install Add-on From File” command.
+Six Node.js regression tests pass. Version 1.5.0.11 has also been installed and activated by the actual Zotero 10.0.6 AddonManager in an isolated profile. Menu insertion, preference-pane registration, online DOI cleanup, disable and re-enable have been checked. Visual rendering of settings, Crossref lookup for missing DOIs, shortDOI conversion and large-library behavior remain unverified. Download the XPI from `dist/`, then install it using Zotero's “Install Add-on From File” command.
 
 ## 原始项目、致谢与许可证 / Upstream and license
 
@@ -80,7 +85,7 @@ Six Node.js tests with a simulated Zotero environment pass. JavaScript syntax an
 - **原项目地址**：https://github.com/bwiernik/zotero-shortdoi
 - **原作者**：Brenton M. Wiernik（GitHub：[@bwiernik](https://github.com/bwiernik)）。
 - **修改基础**：[v1.5.0](https://github.com/bwiernik/zotero-shortdoi/releases/tag/v1.5.0)，发布于 2024-08-09。
-- **本兼容修改版**：1.5.0.10，修改日期 2026-10-24，由 [XavierLin19](https://github.com/XavierLin19) 发布。
+- **本兼容修改版**：1.5.0.11，修改日期 2026-10-24，由 [XavierLin19](https://github.com/XavierLin19) 发布。
 - **许可证**：[Mozilla Public License 2.0](LICENSE)，保留原项目的许可及作者署名。
 
 DOI 获取、校验和短 DOI 转换的核心实现来自原始项目。本仓库的工作是在该实现上进行 Zotero 10 兼容修改、补充回归测试与发布说明，不将上游代码宣称为原创。原项目还注明其部分代码参考 Anton Beloglazov 的 [Zotero Google Scholar Citations](https://github.com/beloglazov/zotero-scholar-citations) 插件，在此一并致谢。

@@ -1,0 +1,19 @@
+{
+  "addons": {
+    "zoteroshortdoi@wiernik.org": {
+      "updates": [
+        {
+          "applications": {
+            "zotero": {
+              "strict_min_version": "10.0",
+              "strict_max_version": "10.0.*"
+            }
+          },
+          "update_link": "https://github.com/XavierLin19/zotero-doi-manager-zotero10/raw/refs/heads/main/dist/zotero-doi-manager-1.5.0.11-zotero10.xpi",
+          "update_hash": "sha256:64a388ca02dc718c49c41b11c63e6c7171afc836900a6f800f03a60e6b8239c2",
+          "version": "1.5.0.11"
+        }
+      ]
+    }
+  }
+}
