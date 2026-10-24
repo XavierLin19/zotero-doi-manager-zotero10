@@ -4,7 +4,7 @@
 
 > 本项目基于 [Brenton M. Wiernik 的 Zotero DOI Manager（bwiernik/zotero-shortdoi）](https://github.com/bwiernik/zotero-shortdoi)，以其 [v1.5.0 发布包](https://github.com/bwiernik/zotero-shortdoi/releases/tag/v1.5.0) 为修改基础。这是非官方兼容修改版，与原作者及 Zotero 官方无隶属关系。
 >
-> **验证状态：**6 项 Node.js 模拟环境测试及 XPI 结构与内容检查通过。尚未完成 Zotero 10.0.6 真实界面的安装与联网端到端验证；当前版本供安装测试，不能将兼容范围声明视为所有功能均已实测。
+> **验证状态**：6 项 Node.js 模拟环境测试及 XPI 结构与内容检查通过。尚未完成 Zotero 10.0.6 真实界面的安装与联网端到端验证；当前版本供安装测试，不能将兼容范围声明视为所有功能均已实测。
 
 ## 主要功能
 
@@ -74,13 +74,13 @@ Six Node.js tests with a simulated Zotero environment pass. JavaScript syntax an
 
 ## 原始项目、致谢与许可证 / Upstream and license
 
-**本项目基于以下原始项目修改：**
+**本项目基于以下原始项目修改**：
 
-- **原项目名称：**Zotero DOI Manager（仓库名 `zotero-shortdoi`）。
-- **原项目地址：**https://github.com/bwiernik/zotero-shortdoi
-- **原作者：**Brenton M. Wiernik（GitHub：[@bwiernik](https://github.com/bwiernik)）。
-- **修改基础：**[v1.5.0](https://github.com/bwiernik/zotero-shortdoi/releases/tag/v1.5.0)，发布于 2024-08-09。
-- **本兼容修改版：**1.5.0.10，修改日期 2026-10-24，由 [XavierLin19](https://github.com/XavierLin19) 发布。
-- **许可证：**[Mozilla Public License 2.0](LICENSE)，保留原项目的许可及作者署名。
+- **原项目名称**：Zotero DOI Manager（仓库名 `zotero-shortdoi`）。
+- **原项目地址**：https://github.com/bwiernik/zotero-shortdoi
+- **原作者**：Brenton M. Wiernik（GitHub：[@bwiernik](https://github.com/bwiernik)）。
+- **修改基础**：[v1.5.0](https://github.com/bwiernik/zotero-shortdoi/releases/tag/v1.5.0)，发布于 2024-08-09。
+- **本兼容修改版**：1.5.0.10，修改日期 2026-10-24，由 [XavierLin19](https://github.com/XavierLin19) 发布。
+- **许可证**：[Mozilla Public License 2.0](LICENSE)，保留原项目的许可及作者署名。
 
 DOI 获取、校验和短 DOI 转换的核心实现来自原始项目。本仓库的工作是在该实现上进行 Zotero 10 兼容修改、补充回归测试与发布说明，不将上游代码宣称为原创。原项目还注明其部分代码参考 Anton Beloglazov 的 [Zotero Google Scholar Citations](https://github.com/beloglazov/zotero-scholar-citations) 插件，在此一并致谢。
